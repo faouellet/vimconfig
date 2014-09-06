@@ -1,6 +1,6 @@
 # Create symlink for the dotfiles
 ln -s ~/.vim/vimrc ~/.vimrc
-ln -s ~/.vim/.ycm_extra_conf.py
+ln -s ~/.vim/.ycm_extra_conf.py ~/.ycm_extra_conf.py
 
 # Get the submodules
 git submodule init
