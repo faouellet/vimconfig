@@ -1,19 +1,28 @@
-# Create a .vim folder if one is not present
+# Remove old .vim directory if one already exists and then create an empty one
 cd ~
-mkdir .vim
+if [ -d ".vim" ]; then
+  rm -rf ".vim"
+fi
+mkdir ".vim"
 
-# Transfer the content to the .vim folder
+# Install Neovim
+apt-get install software-properties-common
+add-apt-repository ppa:neovim-ppa/unstable
+apt-get install neovim
+
+# Transfer the contents of my vim config to the .vim folder
 mv vimconfig/* .vim/
 cd .vim/
 rmdir vimconfig/
 
-# Create symlink for the dotfiles
+# Create symlink for the .vimrc
 ln -s ~/.vim/.vimrc ~/.vimrc
-ln -s ~/.vim/.ycm_extra_conf.py ~/.ycm_extra_conf.py
 
-# Get the submodules
-git submodule init
-git submodule update --init --recursive
+# Get Vundle  plugin manager
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Have Vundle fetch the plugins
+nvim -i NONE -c VundleUpdate -c quitall
 
 # Install YouCompleteMe
 cd bundle/YouCompleteMe/
